@@ -53,6 +53,7 @@ export default function CaveEntry({ data }: { data: Cave }) {
   return (
     <div className="mb-4 pt-2" id={id}>
       <h2 className="text-xl font-extrabold mb-2">{name}</h2>
+
       <DataPoint title="Typ" body={type} compact />
       <DataPoint title="Värdeklassificering" body={importance} compact />
       <DataPoint
@@ -76,6 +77,7 @@ export default function CaveEntry({ data }: { data: Cave }) {
       >
         Mer information {showDetails ? "↑" : "↓"}
       </a>
+
       {showDetails && (
         <div className="ml-1 pl-2 border-l-4 border-l-gray-200">
           {location && <DataPoint title="Läge" body={location} />}
