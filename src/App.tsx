@@ -24,14 +24,14 @@ export default function App() {
       >
         <div id="caves">
           <h1 className="text-3xl font-extrabold">Grottor i Bohuslän</h1>
-          <em className="block my-3">
+          <em className="inline-block my-3">
             {caves.length} st från norr till söder:
           </em>
           {caves.map((cave) => (
             <CaveEntry data={cave} key={cave.id} />
           ))}
         </div>
-        <p className="block italic mt-10 text-gray-600">
+        <p className="inline-block italic mt-10 text-gray-600">
           Informationen är baserad på Lars Bengtssons "Grottor i Göteborgs och
           Bohus län" (Miljövårdsrapport 1993:6, Länsstyrelsen)
         </p>
