@@ -20,7 +20,7 @@ export default function App() {
       </div>
       <div
         id="content"
-        className="fixed right-0 w-1/2 h-full pl-3 overflow-y-scroll mt-3"
+        className="fixed right-0 w-1/2 h-full pl-3 overflow-y-scroll pt-3"
       >
         <div id="caves">
           <h1 className="text-3xl font-extrabold">Grottor i Bohuslän</h1>
@@ -31,6 +31,10 @@ export default function App() {
             <CaveEntry data={cave} key={cave.id} />
           ))}
         </div>
+        <p className="block italic mt-10 text-gray-600">
+          Informationen är baserad på Lars Bengtssons "Grottor i Göteborgs och
+          Bohus län" (Miljövårdsrapport 1993:6, Länsstyrelsen)
+        </p>
       </div>
     </>
   );
