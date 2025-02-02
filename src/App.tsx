@@ -18,13 +18,9 @@ export default function App() {
         <Filter caves={data} onChange={(caves) => setCaves(caves)} />
         <Map caves={caves} />
       </div>
-      <div
-        id="content"
-        className="fixed right-0 w-1/2 h-full pl-3 overflow-y-scroll pt-3"
-      >
-        <div id="caves">
-          <h1 className="text-3xl font-bold">Grottor i Bohuslän</h1>
 
+      <div className="fixed right-0 w-1/2 h-full pl-3 overflow-y-scroll pt-3">
+        <div>
           {caves.map((cave) => (
             <CaveEntry data={cave} key={cave.id} />
           ))}
