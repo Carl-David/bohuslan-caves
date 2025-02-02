@@ -1,0 +1,37 @@
+import React from "react";
+import CaveEntry, { Cave } from "./components/CaveEntry";
+import Filter from "./components/Filter";
+import Map from "./components/Map";
+import data from "./data.json";
+
+// Coordinates are provided as RT90 minus 1 digit
+// Converted to WGS84 here: https://pap.as/sweref
+// Also good for converting: https://dancasey.ie/batch-coordinate-converter
+
+export default function App() {
+  data.sort((a, b) => b.coordinates[0] - a.coordinates[0]);
+  const [caves, setCaves] = React.useState<Cave[]>(data);
+
+  return (
+    <>
+      <div>
+        <Filter caves={data} onChange={(caves) => setCaves(caves)} />
+        <Map caves={caves} />
+      </div>
+      <div
+        id="content"
+        className="fixed right-0 w-1/2 h-full pl-3 overflow-y-scroll mt-3"
+      >
+        <div id="caves">
+          <h1 className="text-3xl font-extrabold">Grottor i Bohuslän</h1>
+          <em className="block my-3">
+            {caves.length} st från norr till söder:
+          </em>
+          {caves.map((cave) => (
+            <CaveEntry data={cave} key={cave.id} />
+          ))}
+        </div>
+      </div>
+    </>
+  );
+}
