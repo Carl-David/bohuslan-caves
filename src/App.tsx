@@ -32,7 +32,7 @@ export default function App() {
           <Map caves={caves} />
         </div>
 
-        <div className="lg:fixed lg:w-1/2 lg:right-0 lg:h-full h-[50vh] w-full overflow-y-scroll pl-3">
+        <div className="lg:fixed lg:w-1/2 lg:right-0 lg:h-full h-[50vh] w-full overflow-y-scroll pl-3 mt-2">
           <div>
             {caves.map((cave) => (
               <CaveEntry data={cave} key={cave.id} />
