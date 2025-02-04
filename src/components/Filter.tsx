@@ -29,11 +29,11 @@ export default function Filter({
   };
 
   return (
-    <div className="sticky p-3 top-0 right-0 bg-white flex justify-between">
+    <>
       <div className="mr-2">
         <label>
           Typ
-          <select id="type" onChange={filterType}>
+          <select id="type" onChange={filterType} className="w-32">
             <option value="">Alla</option>
             {caves
               .map((entry) => entry.type)
@@ -50,7 +50,7 @@ export default function Filter({
       <div className="mr-2">
         <label>
           Värde
-          <select id="values" onChange={filterValue}>
+          <select id="values" onChange={filterValue} className="w-32">
             <option value="">Alla</option>
             <option value="V1">V1 (högt vetenskapligt värde)</option>
             <option value="V2">V2 (visst vetenskapligt värde)</option>
@@ -64,6 +64,6 @@ export default function Filter({
           </select>
         </label>
       </div>
-    </div>
+    </>
   );
 }

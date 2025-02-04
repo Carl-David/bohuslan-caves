@@ -1,12 +1,11 @@
 import { ReactNode, useState } from "react";
 
-export interface Cave {
+export type Cave = {
   id: string;
   name: string;
   type: string;
   importance: string;
   location?: string;
-  mapId: string;
   coordinates: number[];
   surroundings?: string;
   description?: string;
@@ -14,7 +13,7 @@ export interface Cave {
   scientificValue?: string;
   recreationalValue?: string;
   protectionValue?: string;
-}
+};
 
 const DataPoint = ({
   title,
@@ -51,7 +50,7 @@ export default function CaveEntry({ data }: { data: Cave }) {
   } = data;
 
   return (
-    <div className="mb-4 pt-2" id={id}>
+    <div className="mb-4" id={id}>
       <h2 className="text-xl font-extrabold mb-2">{name}</h2>
 
       <DataPoint title="Typ" body={type} compact />

@@ -23,7 +23,7 @@ export default function Map({ caves }: { caves: Cave[] }) {
         projection: "mercator",
         style: "mapbox://styles/mapbox/outdoors-v12",
         center: [11.580408533154396, 58.3594082820708],
-        zoom: 7,
+        zoom: 6,
         attributionControl: false,
       });
 
@@ -106,14 +106,12 @@ export default function Map({ caves }: { caves: Cave[] }) {
         });
       });
     } catch (e) {
-      setError((e as Error).message);
       console.error(error);
+      setError((e as Error).message);
+      const map = document.querySelector("#map");
+      if (map) map.innerHTML = `<span class="text-red-600">${error}</span>`;
     }
   });
 
-  return (
-    <div id="map" className="fixed left-0 mr-3 w-1/2 h-full p-4">
-      <span className="text-red-600">{error}</span>
-    </div>
-  );
+  return <div id="map"></div>;
 }
