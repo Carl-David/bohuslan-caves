@@ -112,7 +112,8 @@ export default function Map({ caves }: { caves: Cave[] }) {
       console.error(error);
       setError((e as Error).message);
       const map = document.querySelector("#map");
-      if (map) map.innerHTML = `<span class="text-red-600">${error}</span>`;
+      if (map)
+        map.innerHTML = `<span class="block text-red-600 mt-[50vh]">${error}</span>`;
     }
   });
 
