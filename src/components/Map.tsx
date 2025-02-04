@@ -1,4 +1,4 @@
-import mapboxgl from "mapbox-gl";
+import mapboxgl, { Map as MapboxMap } from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect, useState } from "react";
 import { Cave } from "./CaveEntry";
@@ -33,7 +33,7 @@ export default function Map({ caves }: { caves: Cave[] }) {
         new mapboxgl.ScaleControl({
           maxWidth: 80,
           unit: "metric",
-        })
+        }) as any
       );
 
       map.addControl(
@@ -54,6 +54,9 @@ export default function Map({ caves }: { caves: Cave[] }) {
       );
 
       class StyleControl {
+        _map: MapboxMap | undefined;
+        _container: HTMLElement | undefined;
+
         onAdd(map: any) {
           this._map = map;
           this._container = document.createElement("div");
@@ -74,14 +77,14 @@ export default function Map({ caves }: { caves: Cave[] }) {
         }
 
         onRemove() {
-          this._container.parentNode.removeChild(this._container);
+          this._container?.parentNode?.removeChild(this._container);
           this._map = undefined;
         }
 
         onClick() {
-          this._map.style.globalId === "mapbox://styles/mapbox/outdoors-v12"
-            ? this._map.setStyle("mapbox://styles/mapbox/satellite-v9")
-            : this._map.setStyle("mapbox://styles/mapbox/outdoors-v12");
+          this._map?.style.globalId === "mapbox://styles/mapbox/outdoors-v12"
+            ? this._map?.setStyle("mapbox://styles/mapbox/satellite-v9")
+            : this._map?.setStyle("mapbox://styles/mapbox/outdoors-v12");
         }
       }
 
