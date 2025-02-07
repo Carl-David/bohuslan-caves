@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import CaveEntry, { Cave } from "./components/CaveEntry";
 import Filter from "./components/Filter";
 import Map from "./components/Map";
@@ -11,18 +11,6 @@ import data from "./data.json";
 export default function App() {
   data.sort((a, b) => b.coordinates[0] - a.coordinates[0]);
   const [caves, setCaves] = React.useState<Cave[]>(data);
-
-  useEffect(() => {
-    window.addEventListener("load", () =>
-      setTimeout(() => {
-        if (window.location.hash) {
-          document
-            .getElementById(window.location.hash.replace("#", ""))
-            ?.scrollIntoView();
-        }
-      }, 100)
-    );
-  });
 
   return (
     <div className="flex flex-col">

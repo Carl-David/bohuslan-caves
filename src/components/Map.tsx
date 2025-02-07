@@ -5,6 +5,20 @@ import { Cave } from "./CaveEntry";
 
 export default function Map({ caves }: { caves: Cave[] }) {
   useEffect(() => {
+    const requestedCave = window.location.hash?.replace("#", "");
+
+    const selectedCave = !!requestedCave
+      ? caves.find((cave) => cave.id === requestedCave)
+      : null;
+
+    window.addEventListener("load", () =>
+      setTimeout(() => {
+        if (!!selectedCave) {
+          document.getElementById(selectedCave.id)?.scrollIntoView();
+        }
+      }, 100)
+    );
+
     mapboxgl.accessToken =
       "pk.eyJ1IjoiZXZpZXhhYWIiLCJhIjoiY2lxaHJ2d3I4MDA5Zmk2a3g2MXluMzlkdyJ9.GzIqoAYBLTE5TZeFyQF0fg";
 
@@ -12,8 +26,10 @@ export default function Map({ caves }: { caves: Cave[] }) {
       container: "map",
       projection: "mercator",
       style: "mapbox://styles/mapbox/outdoors-v12",
-      center: [11.580408533154396, 58.3594082820708],
-      zoom: 6,
+      center: selectedCave
+        ? [selectedCave.coordinates[1], selectedCave.coordinates[0]]
+        : [11.580408533154396, 58.3594082820708],
+      zoom: selectedCave ? 16 : 6,
       attributionControl: false,
     });
 
@@ -87,7 +103,6 @@ export default function Map({ caves }: { caves: Cave[] }) {
           .setLngLat([entry.coordinates[1], entry.coordinates[0]])
           .setPopup(
             new mapboxgl.Popup({
-              closeOnMove: true,
               closeButton: false,
             }).setText(entry.name)
           )
