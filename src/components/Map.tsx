@@ -14,10 +14,9 @@ export default function Map({ caves }: { caves: Cave[] }) {
     window.addEventListener("load", () =>
       setTimeout(() => {
         if (!!selectedCave) {
-          alert(document.getElementById(selectedCave.id));
           document.getElementById(selectedCave.id)?.scrollIntoView();
         }
-      }, 500)
+      }, 100)
     );
 
     mapboxgl.accessToken =
