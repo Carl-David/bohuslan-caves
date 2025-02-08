@@ -14,7 +14,7 @@ export default function Map({ caves }: { caves: Cave[] }) {
     window.addEventListener("load", () =>
       setTimeout(() => {
         if (!!selectedCave) {
-          console.log(document.getElementById(selectedCave.id));
+          alert(document.getElementById(selectedCave.id));
           document.getElementById(selectedCave.id)?.scrollIntoView();
         }
       }, 500)
