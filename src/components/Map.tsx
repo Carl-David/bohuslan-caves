@@ -5,10 +5,13 @@ import { Cave } from "./CaveEntry";
 
 export default function Map({ caves }: { caves: Cave[] }) {
   useEffect(() => {
-    const requestedCave = window.location.hash?.replace("#", "");
+    const urlParams = new URLSearchParams(window.location.search);
+    const caveId = urlParams.get("id");
 
-    const selectedCave = !!requestedCave
-      ? caves.find((cave) => cave.id === requestedCave)
+    // TODO: Make map collapsible
+
+    const selectedCave = !!caveId
+      ? caves.find((cave) => cave.id === caveId)
       : null;
 
     window.addEventListener("load", () =>
@@ -108,9 +111,12 @@ export default function Map({ caves }: { caves: Cave[] }) {
           )
           .addTo(map);
         marker.getElement().setAttribute("title", entry.name);
-        marker.getElement().addEventListener("click", () => {
-          window.location.hash = entry.id;
-        });
+        marker.getElement().onclick = () => {
+          document.getElementById(entry.id)?.scrollIntoView();
+          const url = new URL(window.location.href);
+          url.searchParams.set("id", entry.id);
+          window.history.pushState({}, "", url);
+        };
       });
     });
   });
