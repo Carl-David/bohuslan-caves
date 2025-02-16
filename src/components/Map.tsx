@@ -3,24 +3,15 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect } from "react";
 import { Cave } from "./CaveEntry";
 
-export default function Map({ caves }: { caves: Cave[] }) {
+export default function Map({
+  caves,
+  selectedCave,
+}: {
+  caves: Cave[];
+  selectedCave: Cave | null;
+}) {
   useEffect(() => {
-    const urlParams = new URLSearchParams(window.location.search);
-    const caveId = urlParams.get("id");
-
     // TODO: Make map collapsible
-
-    const selectedCave = !!caveId
-      ? caves.find((cave) => cave.id === caveId)
-      : null;
-
-    window.addEventListener("load", () =>
-      setTimeout(() => {
-        if (!!selectedCave) {
-          document.getElementById(selectedCave.id)?.scrollIntoView();
-        }
-      }, 100)
-    );
 
     mapboxgl.accessToken =
       "pk.eyJ1IjoiZXZpZXhhYWIiLCJhIjoiY2lxaHJ2d3I4MDA5Zmk2a3g2MXluMzlkdyJ9.GzIqoAYBLTE5TZeFyQF0fg";
@@ -30,7 +21,7 @@ export default function Map({ caves }: { caves: Cave[] }) {
       projection: "mercator",
       style: "mapbox://styles/mapbox/outdoors-v12",
       center: selectedCave
-        ? [selectedCave.coordinates[1], selectedCave.coordinates[0]]
+        ? [selectedCave.coordinates[1], selectedCave.coordinates[0] + 0.0005]
         : [11.580408533154396, 58.3594082820708],
       zoom: selectedCave ? 16 : 6,
       attributionControl: false,

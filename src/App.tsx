@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import CaveEntry, { Cave } from "./components/CaveEntry";
 import Filter from "./components/Filter";
 import Map from "./components/Map";
@@ -11,6 +11,19 @@ import data from "./data.json";
 export default function App() {
   data.sort((a, b) => b.coordinates[0] - a.coordinates[0]);
   const [caves, setCaves] = React.useState<Cave[]>(data);
+
+  const urlParams = new URLSearchParams(window.location.search);
+  const caveId = urlParams.get("id");
+
+  const selectedCave = !!caveId
+    ? caves.find((cave) => cave.id === caveId)
+    : null;
+
+  useEffect(() => {
+    if (!!selectedCave) {
+      document.getElementById(selectedCave.id)?.scrollIntoView();
+    }
+  }, []);
 
   return (
     <div className="flex flex-col">
@@ -29,7 +42,7 @@ export default function App() {
           id="map"
           className="lg:fixed lg:left-0 lg:h-full h-[50vh] lg:w-1/2 w-full mr-3 p-4"
         >
-          <Map caves={caves} />
+          <Map caves={caves} selectedCave={selectedCave ?? null} />
         </div>
 
         <div className="lg:fixed lg:w-1/2 lg:right-0 lg:h-full h-[50vh] w-full overflow-y-scroll pl-3 mt-2">

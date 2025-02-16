@@ -74,7 +74,7 @@ export default function CaveEntry({ data }: { data: Cave }) {
         href="#"
         onClick={() => setShowDetails(!showDetails)}
       >
-        Mer information {showDetails ? "↑" : "↓"}
+        Mer information {showDetails ? "⬆️" : "⬇️"}
       </a>
 
       {showDetails && (
